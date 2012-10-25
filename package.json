@@ -1,0 +1,23 @@
+{
+    "name": "sort-dependencies",
+    "description": "Build helper that sorts the names of files (JavaScript, CSS, etc.) based on a file naming convention that indicates dependencies",
+    "version": "0.1.0",
+    "author": {
+        "name": "Jan Miksovsky",
+        "url": "http://miksovsky.blogs.com/flowstate"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/JanMiksovsky/sort-dependencies.git"
+    },
+    "licenses": [
+        {
+          "type": "MIT",
+          "url": "http://github.com/JanMiksovsky/sort-dependencies/blob/master/MIT-LICENSE.txt"
+        }
+    ],
+    "main": "sort-dependencies.js",
+    "dependencies": {
+        "glob-whatev": "~0.1"
+    }
+}
