@@ -1,16 +1,38 @@
 /*
- * Sorts a list of class file names so that they function properly.
+ * Build task helper which sorts a list of class file names so that they can
+ * be combined or processed in order of least dependencies.
+ *
+ * In many situations, it's desirable to sort a list of files by their
+ * dependencies so that no file comes before another file it's dependent on.
+ * E.g., suppose a JavaScript project has two prototypal classes Foo and Bar,
+ * where Bar drives from (i.e., is dependent on) Foo. If these files are
+ * defined in separate files Foo.js and Bar.js, and are combined using a
+ * process that relies on a simple alphabetic sort, Bar.js will end up before
+ * Foo.js. The attempt to define class Bar (based on Foo) will fail, because
+ * Foo hasn't been defined before Bar.
+ *
+ * The solution here relies on a naming convention: a file named Bar.Foo.js
+ * indicates a class (or other collection of code) Bar which is dependent on
+ * a class (or other collection of code) Foo.
+ * 
+ * Examples:
+ * sortFiles([ "Bar.Foo.js", "Foo.js" ]) returns [ "Foo.js", "Bar.Foo.js" ]
+ * sortFiles([ "Bar.js", "Foo.js" ]) returns [ "Bar.js", "Foo.js" ]
+ *
+ * This can also be used in other situations (e.g., CSS files) where multiple
+ * files are combined, and the order in which they're combined matters.
  */
- 
+
 var glob = require( "glob-whatev" );
 var path = require( "path" );
 
 /*
- * Sort an array of file names of the form Foo.Bar.extension, where Foo is the
- * name of a class that depends on base class Bar, such that the files for
- * base classes come before the files for their dependent subclasses.
+ * Sort an array of file names (or paths).
+ *
+ * The names/paths can include wildcards: e.g., "src/*.js" will sort the
+ * names of the JavaScript files in the "src" directory.
  */
-exports.sortClassFiles = function() {
+exports.sortFiles = function() {
 
     var patterns = flatten( arguments );
 
@@ -39,8 +61,6 @@ exports.sortClassFiles = function() {
     for ( var i = 0; i < map.length; i++ ) {
         sortedFileNames.push( map[i][2] );
     }
-
-    // console.log( sortedFileNames );
 
     return sortedFileNames;
 };
