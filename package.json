@@ -1,7 +1,7 @@
 {
     "name": "sort-dependencies",
     "description": "Build helper that sorts the names of files (JavaScript, CSS, etc.) based on a file naming convention that indicates dependencies",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "author": {
         "name": "Jan Miksovsky",
         "url": "http://miksovsky.blogs.com/flowstate"

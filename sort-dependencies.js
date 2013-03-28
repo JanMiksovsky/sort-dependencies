@@ -39,7 +39,8 @@ exports.sortFiles = function() {
     var classFileNames = [];
     for ( var i in patterns ) {
         var fileNames = glob.glob( patterns[i] );
-        classFileNames = classFileNames.concat( fileNames );
+        var sortedFileNames = fileNames.sort();
+        classFileNames = classFileNames.concat( sortedFileNames );
     }
 
     var dependencies = [];
